@@ -21,7 +21,7 @@ public class HomeController {
 	@Lazy
 	private MemberVO loginSession;
 	
-	
+	//홈화면폼, 로그인 세션확인
 	@GetMapping("/")
 	public String home(HttpServletRequest req, Model model) {
 		log.info("check session");
@@ -37,6 +37,7 @@ public class HomeController {
 		return "home";
 	}
 	
+	//로그인 폼이동
 	@GetMapping("/login")
 	public String login(Model model) {
 		log.info("move to login form");

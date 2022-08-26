@@ -85,7 +85,7 @@ public class MemberController {
 		session.removeAttribute("loginSession");
 	}
 	
-	//정보수정폼
+	//정보 수정 폼이동
 	@GetMapping("/modify")
 	public String modify(@ModelAttribute("modifyVO") MemberVO memberVO, Model model) {
 		log.info("move to modify");
@@ -93,7 +93,7 @@ public class MemberController {
 		return "member/modify";
 	}
 	
-	//비밀번호변경
+	//비밀번호변경처리
 	@PostMapping("/modify_pro")
 	public String modify_pro(@Valid @ModelAttribute("modifyVO") MemberVO memberVO, BindingResult result,
 			HttpServletRequest req, Model model) {
