@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<select id="findMember" parameterType="String" resultType="com.mayeye.module.member.MemberVO">
+		<![CDATA[
+			select * 
+			from ME_HOMESITE_ACCNT
+			where member_id = #{member_id}
+		]]>
+	</select>
+	<update id="modifyMember" parameterType="com.mayeye.module.member.MemberVO">
+		<selectKey keyProperty="pwd_date" order="BEFORE" resultType="String">
+				select to_char(sysdate, 'YYYY-MM-DD') from dual
+		</selectKey>
+		<![CDATA[
+			update ME_HOMESITE_ACCNT  
+			set member_pw = #{member_repw}, pwd_date = to_date(#{pwd_date},'YYYY-MM-DD'), mod_date = to_date(#{pwd_date}, 'YYYY-MM-DD')
+			where member_id = #{member_id}
+		]]>
+	</update>
+</mapper>
