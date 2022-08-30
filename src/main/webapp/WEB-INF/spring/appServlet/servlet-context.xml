@@ -19,11 +19,27 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2"/>
 	</beans:bean>
 	
+	<!-- Tiles -->
+	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	<!-- components  -->
 	<context:component-scan base-package="com.mayeye" />
-	<context:component-scan base-package="com.mayeye.*" />
-	<context:component-scan base-package="com.mayeye.*.*" />
+	<context:component-scan base-package="com.mayeye.interceptor" />
+	<context:component-scan base-package="com.mayeye.module.*" />
+	<context:component-scan base-package="com.mayeye.validator.*" />
 	
 	<!-- properties file -->
 	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -100,6 +116,17 @@
 	</beans:bean>
 	
 	<!-- interceptor setting -->
-	
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/*"/>
+			<exclude-mapping path="/member/login"/>
+			<exclude-mapping path="/member/login_pro"/>
+			<beans:bean class="com.mayeye.interceptor.LoginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/member/modify"/>
+			<beans:bean class="com.mayeye.interceptor.AuthInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>

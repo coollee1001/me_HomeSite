@@ -10,8 +10,7 @@
 <title>정보 수정</title>
 </head>
 <body>
-	<c:if test="${message ne null}"><script>alert('변경되었습니다'); location.href="/home";</script></c:if>
-	<c:if test="${modifyVO.member_code ne '0'}"><script>alert('권한이 없습니다'); location.href="/home"</script></c:if>
+	<c:if test="${message ne null}"><script>alert('변경되었습니다'); location.href="${root}home";</script></c:if>
 	<form:form action="${root}member/modify_pro" modelAttribute="modifyVO" method="post">
 		<form:hidden path="member_id"/>
 		<form:label path="member_pw">현재 비밀번호</form:label><br/>

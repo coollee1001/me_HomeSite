@@ -1,12 +1,12 @@
 package com.mayeye.module.member.service;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mayeye.module.member.MemberVO;
 import com.mayeye.module.member.repository.MemberRepository;
-
-
 
 @Service
 public class MemberServiceImpl implements MemberService{
