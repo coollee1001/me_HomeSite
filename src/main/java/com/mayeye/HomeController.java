@@ -18,6 +18,7 @@ public class HomeController {
 	// 일반사용자용
 	@GetMapping("/kor")
 	public String kor() {
+		log.info("Move form common");
 		return "kor/sub";
 	}
 	

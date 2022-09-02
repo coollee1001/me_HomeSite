@@ -46,6 +46,7 @@
 		<beans:property name="locations">
 			<beans:list>
 				<beans:value>classpath:properties/db.properties</beans:value>
+				<beans:value>classpath:properties/option.properties</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
@@ -75,6 +76,7 @@
 		</beans:property>
 	</beans:bean>
 	 -->
+	 
 	 <beans:bean class="com.zaxxer.hikari.HikariConfig" id="basic_data_source">
 		<beans:property name="driverClassName" value="${db.classname}"/>
 		<beans:property name="jdbcUrl" value="${db.url}"/>
@@ -84,7 +86,7 @@
 	 
 	 <beans:bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSession">
 		<beans:property name="dataSource" ref="dataSource"/>
-		<beans:property name="mapperLocations" value="classpath:mapper/*.xml"/>
+		<beans:property name="mapperLocations" value="classpath:mapper/*/*.xml"/>
 	</beans:bean>	 
 	 
 	
@@ -118,13 +120,19 @@
 	<!-- interceptor setting -->
 	<interceptors>
 		<interceptor>
-			<mapping path="/member/*"/>
+			<mapping path="/member/**"/>
 			<exclude-mapping path="/member/login"/>
 			<exclude-mapping path="/member/login_pro"/>
+			<exclude-mapping path="/member/manage/menuList"/>
 			<beans:bean class="com.mayeye.interceptor.LoginInterceptor"/>
 		</interceptor>
 		<interceptor>
 			<mapping path="/member/modify"/>
+			<beans:bean class="com.mayeye.interceptor.AuthInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/member/manage/*"/>
+			<exclude-mapping path="/member/manage/menuList"/>
 			<beans:bean class="com.mayeye.interceptor.AuthInterceptor"/>
 		</interceptor>
 	</interceptors>

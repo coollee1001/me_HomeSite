@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="subMenu">
+	<resultMap type="com.mayeye.module.sub.SubMenuNameVO" id="tempsubMenuName">
+		<result property="subMenuName_index_seq" column="subMenuName_index_seq"/>
+		<result property="title" column="title"/>
+		<result property="listOrder" column="listOrder"/>
+	</resultMap>
+	<resultMap type="com.mayeye.module.file.FileVO" id="tmepFile">
+		<result property="file_seq" column="file_seq"/>
+		<result property="fileUUID" column="fileUUID"/>
+		<result property="fileOriginalName" column="fileOriginalName"/>
+		<result property="fileName" column="fileName"/>
+		<result property="uploadPath" column="uploadPath"/>
+		<result property="fileExtention" column="fileExtention"/>
+	</resultMap>
+	<resultMap type="com.mayeye.module.sub.SubMenuVO" id="subMenu">
+		<result property="subMenuList_index_seq" column="subMenuList_index_seq"/>
+		<result property="subMenuName_index_seq" column="subMenuName_index_seq"/>
+		<result property="title" column="title"/>
+		<result property="link" column="link"/>
+		<result property="del_sts" column="del_sts"/>
+		<result property="listOrder" column="listOrder"/>
+		<result property="file_seq" column="file_seq"/>
+		<collection property="filevo" resultMap="tmepFile"/>
+		<collection property="subMenuName" resultMap="tempsubMenuName"/>
+	</resultMap>
+	
+	<select id="findSubMenuList" resultMap="subMenu">
+		<![CDATA[
+			select sm.subMenuList_index_seq, sm.subMenuName_index_seq, sm.title, sm.link, sm.file_seq, sm.listOrder, sm.del_sts,
+			smn.title,
+			smf.File_seq, smf.FileUUID, smf.FileOriginalName, smf.FileName, smf.UploadPath, smf.FileExtention 
+			from me_submenulist as sm join me_submenuname as smn join me_filetable as smf
+			where sm.subMenuName_index_seq = smn.subMenuName_index_seq
+			and sm.File_seq = smf.File_seq 
+			order by sm.listOrder desc
+		]]>
+	</select>
+	
+	<select id="findSubMenuNameList" resultMap="subMenu" parameterType="Integer">
+		<![CDATA[
+			select sm.subMenuList_index_seq, sm.subMenuName_index_seq, sm.title, sm.link, sm.file_seq, sm.listOrder, sm.del_sts,
+			smn.title,
+			smf.File_seq, smf.FileUUID, smf.FileOriginalName, smf.FileName, smf.UploadPath, smf.FileExtention 
+			from me_submenulist as sm join me_submenuname as smn join me_filetable as smf
+			where sm.subMenuName_index_seq = ${subMenuName_index_seq} = smn.subMenuName_index_seq 
+			and sm.File_seq = smf.File_seq
+			order by sm.listOrder desc
+		]]>
+	</select>
+	
+	<select id="findSubMenuName" resultType="com.mayeye.module.sub.SubMenuNameVO">
+		<![CDATA[
+			select * 
+			from me_submenuname
+			order by listOrder
+		]]>
+	</select>
+	
+	<select id="listOrderSearch" resultType="Integer">
+		select ifnull(max(listOrder)+1,1) as insertOrder from me_submenulist
+	</select>
+	
+	<insert id="insertPeed" parameterType="com.mayeye.module.sub.SubMenuVO">
+		<![CDATA[
+			insert into me_submenulist(subMenuName_index_seq, title, link, listOrder, File_seq)
+			values(#{subMenuName_index_seq}, #{title}, #{link}, #{listOrder}, #{file_seq})
+		]]>
+	</insert>
+	
+	<select id="selectSubMenuVO" resultMap="subMenu" parameterType="Integer">
+		<![CDATA[
+			select sm.subMenuList_index_seq, sm.subMenuName_index_seq, sm.title, sm.link, sm.file_seq, sm.listOrder, sm.del_sts,
+			smn.title,
+			smf.File_seq, smf.FileUUID, smf.FileOriginalName, smf.FileName, smf.UploadPath, smf.FileExtention 
+			from me_submenulist as sm join me_submenuname as smn join me_filetable as smf
+			where sm.subMenuName_index_seq = smn.subMenuName_index_seq
+			and sm.File_seq = smf.File_seq and sm.subMenuList_index_seq = #{subMenuList_index_seq}
+		]]>
+	</select>
+	
+	<update id="updatePeed" parameterType="com.mayeye.module.sub.SubMenuVO">
+		<![CDATA[
+			update me_submenulist
+			set subMenuName_index_seq = #{subMenuName_index_seq},
+			 	title = #{title},
+			 	link = #{link},
+			 	listOrder = #{listOrder},
+			 	File_seq = #{file_seq}
+			where subMenuList_index_seq = #{subMenuList_index_seq}
+		]]>
+	</update>
+	
+	<update id="deletePeed" parameterType="Integer">
+		<![CDATA[
+			update me_submenulist
+			set del_sts = 'Y'
+			where subMenuList_index_seq = #{subMenuList_index_seq}
+		]]>
+	</update>
+	
+	<update id="recoverPeed" parameterType="Integer">
+		<![CDATA[
+			update me_submenulist
+			set del_sts = 'N'
+			where subMenuList_index_seq = #{subMenuList_index_seq}
+		]]>
+	</update>
+	
+	
+	<update id="deleteComplPeed" parameterType="Integer">
+		<![CDATA[
+			delete from me_submenulist
+			where subMenuList_index_seq = #{subMenuList_index_seq} and del_sts = 'Y'
+		]]>
+	</update>
+</mapper>

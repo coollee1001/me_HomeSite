@@ -11,13 +11,42 @@
  		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"/>
  	</definition>
  	
+ 	<definition name="layout_manage" template="/WEB-INF/tiles/layout.jsp">
+ 		<put-attribute name="header" value="/WEB-INF/tiles/header_manage.jsp"/>
+ 		<put-attribute name="left" value="/WEB-INF/tiles/left_manage.jsp"/>
+ 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"/>
+ 	</definition>
+ 	
+ 	<!-- 적용 예외 -->
+ 	<definition name="empty" template="/WEB-INF/tiles/layout-empty.jsp">
+ 		
+ 	</definition>
+ 	
  	<!-- 일반 사용자 -->
  	<definition name="kor/*" extends="layout">
  		<put-attribute name="body" value="/WEB-INF/views/kor/{1}.jsp"/>
  	</definition>
  	
  	<!-- 관리자 -->
- 	<definition name="member/*" extends="layout">
+ 	<definition name="member/*" extends="layout_manage">
  		<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp"/>
  	</definition>
+ 	
+ 	<definition name="member/*/*" extends="layout_manage">
+ 		<put-attribute name="body" value="/WEB-INF/views/member/{1}/{2}.jsp"/>
+ 	</definition>
+ 	
+ 	<!-- 일반 사용자 예외 -->
+ 	<definition name="empty/kor/*" extends="empty">
+ 		<put-attribute name="content" value="/WEB-INF/views/kor/{1}.jsp"/>
+ 	</definition>
+ 	
+ 	<!-- 관리자 예외 -->
+ 	<definition name="empty/member/*" extends="empty">
+ 		<put-attribute name="content" value="/WEB-INF/views/member/{1}.jsp"/>
+ 	</definition>
+ 	<definition name="empty/member/manage/*" extends="empty">
+ 		<put-attribute name="content" value="/WEB-INF/views/member/manage/{1}.jsp"/>
+ 	</definition>
+ 	
  </tiles-definitions>

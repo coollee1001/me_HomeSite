@@ -5,7 +5,7 @@
 	<select id="findMember" parameterType="String" resultType="com.mayeye.module.member.MemberVO">
 		<![CDATA[
 			select * 
-			from ME_HOMESITE_ACCNT
+			from me_homesite_accnt
 			where member_id = #{member_id}
 		]]>
 	</select>
@@ -14,7 +14,7 @@
 				select to_char(sysdate, 'YYYY-MM-DD') from dual
 		</selectKey>
 		<![CDATA[
-			update ME_HOMESITE_ACCNT  
+			update me_homesite_accnt 
 			set member_pw = #{member_repw}, pwd_date = to_date(#{pwd_date},'YYYY-MM-DD'), mod_date = to_date(#{pwd_date}, 'YYYY-MM-DD')
 			where member_id = #{member_id}
 		]]>

@@ -7,6 +7,24 @@
 <head>
 	<title>mayeye</title>
 	<link rel="stylesheet" href="${root}resources/css/common.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	function reList(subMenuName_index_seq){
+		$.ajax({
+			url : "${root}member/manage/menuList",
+			type : 'post',
+			data : {
+				index : subMenuName_index_seq
+			},
+			success:function(data){
+				$("#reList").html(data);
+			}, error : function(data){
+				console.log("오류");
+			}
+		});
+	}
+	
+</script>
 </head>
 <body>
 	<div class='wrap'>

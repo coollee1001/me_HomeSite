@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="file">
+	<select id="findFile" parameterType="String" resultType="com.mayeye.module.file.FileVO">
+		<![CDATA[
+			select *
+			from me_filetable
+			where FileUUID = #{fileUUID}
+		]]>
+	</select>
+	
+	<insert id="insertFile" parameterType="com.mayeye.module.file.FileVO">
+		<![CDATA[
+			insert into me_filetable(FileUUID, FileOriginalName, FileName, UploadPath, FileExtention)
+			values(#{fileUUID}, #{fileOriginalName}, #{fileName}, #{uploadPath}, #{fileExtention})
+		]]>
+	</insert>
+</mapper>

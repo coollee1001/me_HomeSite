@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.mayeye.module.member.MemberVO;
 import com.mayeye.module.member.service.MemberService;
@@ -43,7 +44,7 @@ public class MemberController {
 		log.info("move to login form");
 		MemberVO loginVO = new MemberVO();
 		model.addAttribute("LoginVO", loginVO);
-		return "member/login";
+		return "empty/member/login";
 	}
 	
 	//로그인처리
@@ -53,7 +54,7 @@ public class MemberController {
 		log.info("check login");
 		if(result.hasErrors()) {
 			log.error("problems, login validator");
-			return "member/login";
+			return "empty/member/login";
 		}
 		MemberVO tempMember = null; 
 		tempMember = memberService.findMember(memberVO);
@@ -62,14 +63,14 @@ public class MemberController {
 		if(tempMember == null) {
 			log.info("there isn't user");
 			result.addError(new FieldError("LoginVO", "member_id", "존재하지 않는 사용자입니다"));
-			return "member/login";
+			return "empty/member/login";
 		}		
 		
 		//비밀번호가 맞지 않으면
 		if(!passEncoder.matches(memberVO.getMember_pw(), tempMember.getMember_pw())) {
 			log.info("not matching password of {}", memberVO.getMember_id());
 			result.addError(new FieldError("LoginVO", "member_pw", "비밀번호가 맞지 않습니다"));
-			return "member/login";
+			return "empty/member/login";
 		}
 		
 		//세션 설정 및 로그인 유저 설정
@@ -89,11 +90,14 @@ public class MemberController {
 	
 	//로그아웃처리
 	@GetMapping("/logout")
-	public String logout(HttpServletRequest req, Model model) {
+	public String logout(HttpServletRequest req, Model model, SessionStatus sessionStatus) {
 		HttpSession session = req.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("loginSession");
+		
 		memberVO.setLogin_flag(false);
-		session.setAttribute("loginSession", memberVO);
+		session.removeAttribute("loginSession");
+		sessionStatus.setComplete();
+		
 		model.addAttribute("message", "OK");
 		log.info("logout");
 		return "home";

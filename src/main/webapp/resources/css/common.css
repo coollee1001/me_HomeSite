@@ -13,19 +13,19 @@
 }
 
 .Header, .Footer{
-	height: 8em;
+	height: 10em;
 }
 
 .SideBar{
 	width: 10%;
-	height: 600px;
+	min-height:280px;
 	background-color: #FF8FB1;
 	float: left;
 }
 
 .page_content{
 	width: 90%;
-	height: 600px;
+	min-height:280px;
 	background-color: #B270A2;
 	float: left;
 }
