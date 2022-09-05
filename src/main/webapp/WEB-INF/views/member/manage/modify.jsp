@@ -16,15 +16,14 @@
 		<input type="hidden" id="modifyidx" name="modifyidx" value="${modifySubMenuVO.subMenuList_index_seq}">
 		<form:hidden path="listOrder"/>
 		<form:hidden path="file_seq"/>
-		<form:hidden path="file_seq"/>
 		<form:select path="subMenuName_index_seq" multiple="disable">
 		<form:options items="${modifySubMenuVO.subMenuName}" itemLabel="title" itemValue="subMenuName_index_seq"/>
 		</form:select>
 		<form:label path="title">표시 제목</form:label>
-		<form:input path="title"/>
+		<form:input path="title" required="required"/>
 		<form:errors path="title" style="color:red"/>
 		<form:label path="link">링크</form:label>
-		<form:input path="link"/>
+		<form:input path="link" required="required"/>
 		<form:errors path="link" style="color:red"/>
 		<form:label path="tempFile">표시 이미지</form:label>
 		<img src="${root}resources/upload/${modifySubMenuVO.filevo.fileUUID}" alt="${modifySubMenuVO.title}"/>

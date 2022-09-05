@@ -11,6 +11,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.mayeye.module.member.MemberVO;
 
+
+//로그인 체크
 public class LoginInterceptor implements HandlerInterceptor{	
 
 	@Override

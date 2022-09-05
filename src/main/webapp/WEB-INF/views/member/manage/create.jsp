@@ -14,13 +14,13 @@
 	<form:form action="${root}member/manage/create_pro" method="post" modelAttribute="insertSubMenuVO" enctype="multipart/form-data">
 		<form:label path="subMenuName">분류</form:label>
 		<form:select path="subMenuName_index_seq" multiple="disable">
-		<form:options items="${modifySubMenuVO.subMenuName}" itemLabel="title" itemValue="subMenuName_index_seq"/>
+		<form:options items="${insertSubMenuVO.subMenuName}" itemLabel="title" itemValue="subMenuName_index_seq"/>
 		</form:select>
 		<form:label path="title">표시 제목</form:label>
-		<form:input path="title"/>
+		<form:input path="title"  required="required"/>
 		<form:errors path="title" style="color:red"/>
 		<form:label path="link">링크</form:label>
-		<form:input path="link"/>
+		<form:input path="link" required="required"/>
 		<form:errors path="link" style="color:red"/>
 		<form:label path="tempFile">표시 이미지</form:label>
 		<input type="file" name="tempFile" id="tempFile" required accept="image/*"/>

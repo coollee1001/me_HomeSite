@@ -14,11 +14,13 @@ public class FileRepositoryImpl implements FileRepository{
 	
 	private final String NAMESPACE = "file.";
 	
+	// 파일 찾기
 	@Override
 	public FileVO findFile(String fileUUID) {
 		return sqlSession.selectOne(NAMESPACE + "findFile", fileUUID); 
 	}
 	
+	// 파일 등록
 	@Override
 	public void insertFile(FileVO fileVO) {
 		sqlSession.insert(NAMESPACE + "insertFile", fileVO);

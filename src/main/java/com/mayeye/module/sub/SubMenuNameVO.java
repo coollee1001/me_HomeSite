@@ -14,4 +14,12 @@ public class SubMenuNameVO {
 	
 	// 표시 순서 제어
 	private int listOrder;
+
+	@Override
+	public String toString() {
+		return "SubMenuNameVO [subMenuName_index_seq=" + subMenuName_index_seq + ", title=" + title + ", listOrder="
+				+ listOrder + "]";
+	}
+	
+	
 }

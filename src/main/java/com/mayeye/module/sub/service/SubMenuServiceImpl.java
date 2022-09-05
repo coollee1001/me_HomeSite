@@ -15,14 +15,14 @@ public class SubMenuServiceImpl implements SebMenuService {
 	@Autowired
 	private SubMenuRepository subMenuRepository;
 	
-	// 리스트 가져오기
+	// 모든 리스트 가져오기
 	@Override
 	public List<SubMenuVO> selectAll() {
 		List<SubMenuVO> list = subMenuRepository.selectAll();
 		return list;
 	}
 	
-	// 메뉴 이름 가져오기
+	// 서브 메뉴 이름 가져오기(홈페이지 구축, 업무시스템 구축...)
 	@Override
 	public List<SubMenuNameVO> selectName() {
 		// TODO Auto-generated method stub
@@ -30,18 +30,25 @@ public class SubMenuServiceImpl implements SebMenuService {
 		return list;
 	}
 	
+	// 분류별 게시글 정보 가져오기
+	@Override
+	public List<SubMenuVO> findSubMenuNameList(int subMenuName_index_seq) {
+		List<SubMenuVO> list = subMenuRepository.findSubMenuNameList(subMenuName_index_seq);
+		return list;
+	}
+	
 	// 게시글 등록
 	@Override
 	public void insertPeed(SubMenuVO subMenuVO) {
 		// TODO Auto-generated method stub
+		// istorder구하기(insert시 MAX값+1)
 		int listOrder = subMenuRepository.listOrderSearch();
 		
 		subMenuVO.setListOrder(listOrder);
 		subMenuRepository.insertPeed(subMenuVO);
-		
 	}
 	
-	// 게시글 정보 가져오기
+	// 게시글 정보 가져오기(read)
 	@Override
 	public SubMenuVO selectSubMenuVO(int subMenuList_index_seq) {
 		// TODO Auto-generated method stub
@@ -49,19 +56,11 @@ public class SubMenuServiceImpl implements SebMenuService {
 		return subMenuVO;
 	}
 	
-	// // 분류별 게시글 정보 가져오기
-	@Override
-	public List<SubMenuVO> findSubMenuNameList(int subMenuName_index_seq) {
-		List<SubMenuVO> list = subMenuRepository.findSubMenuNameList(subMenuName_index_seq);
-		return list;
-	}
-	
 	// 게시글 수정
 	@Override
 	public void updatePeed(SubMenuVO subMenuVO) {
 		// TODO Auto-generated method stub
 		subMenuRepository.updatePeed(subMenuVO);
-		
 	}
 	
 	// 삭제
@@ -76,7 +75,6 @@ public class SubMenuServiceImpl implements SebMenuService {
 	public void recoverPeed(int subMenuList_index_seq) {
 		// TODO Auto-generated method stub
 		subMenuRepository.recoverPeed(subMenuList_index_seq);
-		
 	}
 	
 	// 완전 삭제
@@ -85,6 +83,5 @@ public class SubMenuServiceImpl implements SebMenuService {
 		// TODO Auto-generated method stub
 		subMenuRepository.deleteComplPeed(subMenuList_index_seq);
 	}
-
 	
 }

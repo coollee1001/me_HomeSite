@@ -19,7 +19,7 @@ public class HomeController {
 	@GetMapping("/kor")
 	public String kor() {
 		log.info("Move form common");
-		return "kor/sub";
+		return "redirect:/kor/submenuList";
 	}
 	
 	// 홈화면폼, 로그인 세션확인(관리자용)
@@ -29,7 +29,7 @@ public class HomeController {
 		HttpSession session = req.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("loginSession");
 
-		// nullPointError Exception
+		// nullPointError Exception 
 		if (memberVO == null) {
 			log.info("null session");
 			return "home";

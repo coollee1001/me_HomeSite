@@ -80,7 +80,8 @@
 			where sm.subMenuName_index_seq = smn.subMenuName_index_seq
 			and sm.File_seq = smf.File_seq and sm.subMenuList_index_seq = #{subMenuList_index_seq}
 		]]>
-	</select>
+	</select>	
+	
 	
 	<update id="updatePeed" parameterType="com.mayeye.module.sub.SubMenuVO">
 		<![CDATA[

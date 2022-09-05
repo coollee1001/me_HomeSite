@@ -23,6 +23,13 @@ public class FileVO {
 	
 	// 파일 확장명
 	private String fileExtention;
+
+	
+	@Override
+	public String toString() {
+		return "FileVO [file_seq=" + file_seq + ", fileUUID=" + fileUUID + ", fileOriginalName=" + fileOriginalName
+				+ ", fileName=" + fileName + ", uploadPath=" + uploadPath + ", fileExtention=" + fileExtention + "]";
+	}
 	
 	
 }

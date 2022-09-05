@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.mayeye.module.member.MemberVO;
 
+// 관리자 체크
 public class AuthInterceptor implements HandlerInterceptor{	
 	
 	@Override
