@@ -100,7 +100,7 @@ public class MemberController {
 		
 		model.addAttribute("message", "OK");
 		log.info("logout");
-		return "home";
+		return "forward:/member/login";
 	}
 	
 	//정보 수정 폼이동

@@ -32,7 +32,7 @@ public class HomeController {
 		// nullPointError Exception 
 		if (memberVO == null) {
 			log.info("null session");
-			return "home";
+			return "forward:/member/login";
 		}
 
 		if (memberVO.isLogin_flag()) {
@@ -40,7 +40,7 @@ public class HomeController {
 			model.addAttribute("loginSession", (MemberVO) session.getAttribute("loginSession"));
 			return "member/info";
 		}
-		return "home";
+		return "forward:/member/login";
 	}
 	
 	

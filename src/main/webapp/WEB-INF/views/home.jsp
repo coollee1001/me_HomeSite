@@ -5,7 +5,7 @@
 <html>
 <head>
 	<title>mayeye</title>
-	<c:if test="${message ne null}"><script>alert('로그아웃되었습니다');</script></c:if>
+	
 </head>
 <body>
 <h1>

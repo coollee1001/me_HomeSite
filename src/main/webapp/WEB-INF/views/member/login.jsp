@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${root}resources/css/content.css" media="all">
 <link rel="stylesheet" href="${root}resources/css/layout.css" media="all">
 <title>mayeye</title>
+<c:if test="${message ne null}"><script>alert('로그아웃되었습니다');</script></c:if>
 </head>
 <body class="cms mobile" id="intro">
 	<div id="wrap">
