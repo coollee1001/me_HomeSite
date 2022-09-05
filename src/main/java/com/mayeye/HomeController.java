@@ -29,7 +29,7 @@ public class HomeController {
 		HttpSession session = req.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("loginSession");
 
-		// nullPointError Exception 
+		// 가능성 : nullPointError Exception 
 		if (memberVO == null) {
 			log.info("null session");
 			return "forward:/member/login";
@@ -42,7 +42,5 @@ public class HomeController {
 		}
 		return "forward:/member/login";
 	}
-	
-	
 	
 }
