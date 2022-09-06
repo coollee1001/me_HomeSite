@@ -30,17 +30,14 @@ public class HomeController {
 		MemberVO memberVO = (MemberVO) session.getAttribute("loginSession");
 
 		// 가능성 : nullPointError Exception 
-		if (memberVO == null) {
+		if (memberVO == null || !memberVO.isLogin_flag()) {
 			log.info("null session");
 			return "forward:/member/login";
 		}
-
-		if (memberVO.isLogin_flag()) {
-			log.info("get session");
-			model.addAttribute("loginSession", (MemberVO) session.getAttribute("loginSession"));
-			return "member/info";
-		}
-		return "forward:/member/login";
+		log.info("get session");
+		model.addAttribute("loginSession", (MemberVO) session.getAttribute("loginSession"));
+		
+		return "member/info";
 	}
 	
 }
