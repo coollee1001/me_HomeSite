@@ -6,15 +6,15 @@
 <html>
 <head>
 	<title>mayeye</title>
-	<link rel="stylesheet" href="${root}resources/css/common.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
-	function reList(subMenuName_index_seq){
+	function reList(subMenuName_index_seq, page){
 		$.ajax({
 			url : "${root}kor/submenuList",
 			type : 'post',
 			data : {
-				index : subMenuName_index_seq
+				index : subMenuName_index_seq,
+				page : page
 			},
 			success:function(data){
 				$("#reList").html(data);
@@ -25,7 +25,4 @@
 	}
 	</script>
 </head>
-<div class="Header">
-header
-</div>
 

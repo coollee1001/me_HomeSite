@@ -1,11 +1,16 @@
 package com.mayeye.module.sub.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.mayeye.module.sub.SubMenuNameVO;
+import com.mayeye.module.sub.SubMenuPageVO;
 import com.mayeye.module.sub.SubMenuVO;
 import com.mayeye.module.sub.repository.SubMenuRepository;
 
@@ -15,10 +20,19 @@ public class SubMenuServiceImpl implements SebMenuService {
 	@Autowired
 	private SubMenuRepository subMenuRepository;
 	
+	@Value("${page.listcnt}")
+	private int page_listcnt;
+	
+	@Value("${page.paginationcnt}")
+	private int page_paginationcnt;
+	
+	
 	// 모든 리스트 가져오기
 	@Override
-	public List<SubMenuVO> selectAll() {
-		List<SubMenuVO> list = subMenuRepository.selectAll();
+	public List<SubMenuVO> selectAll(int page) {
+		int start = (page - 1) * page_listcnt;
+		RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		List<SubMenuVO> list = subMenuRepository.selectAll(rowBounds);
 		return list;
 	}
 	
@@ -32,9 +46,19 @@ public class SubMenuServiceImpl implements SebMenuService {
 	
 	// 분류별 게시글 정보 가져오기
 	@Override
-	public List<SubMenuVO> findSubMenuNameList(int subMenuName_index_seq) {
-		List<SubMenuVO> list = subMenuRepository.findSubMenuNameList(subMenuName_index_seq);
+	public List<SubMenuVO> findSubMenuNameList(int subMenuName_index_seq, int page) {
+		int start = (page - 1) * page_listcnt;
+		RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		List<SubMenuVO> list = subMenuRepository.findSubMenuNameList(subMenuName_index_seq, rowBounds);
 		return list;
+	}
+	
+	// 페이징 세팅
+	@Override
+	public SubMenuPageVO getContentCnt(int subMenuName_index_seq, int page) {
+		int content_cnt = subMenuRepository.getContentCnt(subMenuName_index_seq);
+		SubMenuPageVO pageVO = new SubMenuPageVO(content_cnt, page, page_listcnt, page_paginationcnt); 
+		return pageVO;
 	}
 	
 	// 게시글 등록

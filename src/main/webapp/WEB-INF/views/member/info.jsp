@@ -9,6 +9,5 @@
 <title>관리자</title>
 </head>
 <body>
-	<h1>관리자</h1>
 </body>
 </html>

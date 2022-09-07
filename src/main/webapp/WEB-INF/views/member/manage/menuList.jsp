@@ -7,14 +7,21 @@
 <head>
 <meta charset="UTF-8">
 <title>리스트</title>
+<script type="text/javascript">
+	window.onload=function(){
+		reList(0);
+	}
+</script>
 </head>
 <body>
-	<a href="javascript:void(0)" onclick="reList(0)">전체</a>&nbsp;
-	<c:forEach var="obj" items="${menuNameList}">
-		<a href="javascript:void(0)" onclick="reList(${obj.subMenuName_index_seq})">${obj.title}</a>&nbsp;
-	</c:forEach>
-	<p id="reList">
-	<jsp:include page="/WEB-INF/views/member/manage/reList.jsp"/>
-	</p>
+	<h3>소분류 리스트</h3>
+	<div class="inner">
+		<div class="controls">
+			<a href="${root}member/manage/create" class="btn ty_2">등록</a>
+		</div>
+		<div id="reList">
+		
+		</div>
+	</div>
 </body>
 </html>

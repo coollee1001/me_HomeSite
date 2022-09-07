@@ -11,11 +11,11 @@
 	</select>
 	<update id="modifyMember" parameterType="com.mayeye.module.member.MemberVO">
 		<selectKey keyProperty="pwd_date" order="BEFORE" resultType="String">
-				select to_char(sysdate, 'YYYY-MM-DD') from dual
+				select DATE_FORMAT(now(), '%Y-%m-%d')
 		</selectKey>
 		<![CDATA[
 			update me_homesite_accnt 
-			set member_pw = #{member_repw}, pwd_date = to_date(#{pwd_date},'YYYY-MM-DD'), mod_date = to_date(#{pwd_date}, 'YYYY-MM-DD')
+			set member_pw = #{member_repw}, pwd_date = date_format(#{pwd_date},'%Y-%m-%d'), mod_date = date_format(#{pwd_date}, '%Y-%m-%d')
 			where member_id = #{member_id}
 		]]>
 	</update>

@@ -1,7 +1,10 @@
 package com.mayeye.module.sub.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,9 +22,9 @@ public class SubMenuRepositoryImpl implements SubMenuRepository{
 	
 	// 모든 리스트 가져오기
 	@Override
-	public List<SubMenuVO> selectAll() {
+	public List<SubMenuVO> selectAll(RowBounds rowBounds) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE+"findSubMenuList");
+		return sqlSession.selectList(NAMESPACE+"findSubMenuList", null, rowBounds);
 	}
 	
 	// 서브 메뉴 이름 가져오기(홈페이지 구축, 업무시스템 구축...)
@@ -33,9 +36,17 @@ public class SubMenuRepositoryImpl implements SubMenuRepository{
 	
 	// 분류별 게시글 정보 가져오기(ajax)
 	@Override
-	public List<SubMenuVO> findSubMenuNameList(int subMenuName_index_seq) {
+	public List<SubMenuVO> findSubMenuNameList(int subMenuName_index_seq, RowBounds rowBounds) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + "findSubMenuNameList", subMenuName_index_seq);
+		return sqlSession.selectList(NAMESPACE + "findSubMenuNameList", subMenuName_index_seq, rowBounds);
+	}
+	
+	@Override
+	public int getContentCnt(int subMenuName_index_seq) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("subMenuName_index_seq", subMenuName_index_seq);
+		return sqlSession.selectOne(NAMESPACE + "getContentCnt", map);
 	}
 
 	// listorder구하기(insert시 MAX값+1)

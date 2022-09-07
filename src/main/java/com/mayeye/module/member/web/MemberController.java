@@ -143,7 +143,7 @@ public class MemberController {
 		session.setAttribute("loginSession", loginSession);
 		
 		//변경 완료 alert 표시를 위한 message 설정
-		model.addAttribute("message", "OK");
+		model.addAttribute("message", "변경되었습니다");
 		return "member/modify";
 	}
 	

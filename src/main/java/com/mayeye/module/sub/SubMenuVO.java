@@ -30,7 +30,7 @@ public class SubMenuVO {
 	
 	// 연결 홈페이지 링크
 	@NotBlank
-	@Pattern(regexp = "^(http(s)?:\\/\\/)([a-zA-Z0-9\\w]+\\.*)+[a-zA-Z0-9]{2,4}$", message = "http[s]://www.~ 형태로 입력해주세요")
+	@Pattern(regexp = "^(?:http(s)?:\\/\\/)?(?:[a-zA-Z0-9]\\.)?[a-zA-Z0-9./]+$", message = "http[s]://~ 형태로 입력해주세요")
 	private String link;
 	
 	// 순서 제어

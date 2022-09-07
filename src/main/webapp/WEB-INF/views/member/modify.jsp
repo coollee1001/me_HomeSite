@@ -10,20 +10,46 @@
 <title>정보 수정</title>
 </head>
 <body>
-	<c:if test="${message ne null}"><script>alert('변경되었습니다'); location.href="${root}home";</script></c:if>
-	<form:form action="${root}member/modify_pro" modelAttribute="modifyVO" method="post">
-		<form:hidden path="member_id"/>
-		<form:label path="member_pw">현재 비밀번호</form:label><br/>
-		<input type="password" value="" id="member_pw" name="member_pw"/><br/>
-		<form:errors path="member_pw" style="color:red"/><br/>
-		<form:label path="member_repw">변경 비밀번호</form:label><br/>
-		<input type="password" value="" id="member_repw" name="member_repw"/><br/>
-		<form:errors path="member_repw" style="color:red"/><br/>
-		<form:label path="member_repw2">변경 비밀번호 확인</form:label><br/>
-		<input type="password" value="" id="member_repw2" name="member_repw2"/><br/>
-		<form:errors path="member_repw2" style="color:red"/><br/>
-		<form:button>확인</form:button>
-		<button type="button" onclick="location.href='/home'">취소</button>
-	</form:form>
+	<h3>계정 비밀번호 관리</h3>
+	<div class="inner">
+		<div class="controls">
+			<input type="submit" class="btn ty_2" value="수정" form="modifyform"/>
+		</div>
+		<div class="view">
+			<form:form action="${root}member/modify_pro" modelAttribute="modifyVO" method="post" id="modifyform">
+				<form:hidden path="member_id"/>
+				<table class="table ty2">
+	                <caption>관리자 계정</caption>
+	                <colgroup>
+	                    <col style="width:180px;">
+	                    <col style="width:auto;">
+	                </colgroup>
+	                <tbody>
+		                <tr>
+		                    <th scope="row">현재 비밀번호 <span class="red">*</span></th>
+		                    <td>
+		                       <input type="password" value="" id="member_pw" name="member_pw"/>
+		                       <form:errors path="member_pw" style="color:red"/>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <th scope="row">변경 비밀번호 <span class="red">*</span></th>
+		                    <td>
+		                       <input type="password" value="" id="member_repw" name="member_repw"/>
+		                       <form:errors path="member_repw" style="color:red"/>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <th scope="row">변경 비밀번호 확인 <span class="red">*</span></th>
+		                    <td>
+		                       <input type="password" value="" id="member_repw2" name="member_repw2"/>
+		                       <form:errors path="member_repw2" style="color:red"/>
+		                    </td>
+		                </tr>
+	                </tbody>
+				</table>
+			</form:form>
+		</div>
+	</div>
 </body>
 </html>

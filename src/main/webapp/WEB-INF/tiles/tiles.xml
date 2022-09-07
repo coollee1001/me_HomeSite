@@ -6,20 +6,20 @@
  <tiles-definitions>
  	<!-- tiles 적용 -->
  	<definition name="layout" template="/WEB-INF/tiles/layout.jsp">
+ 		<put-attribute name="meta" value="/WEB-INF/tiles/kor/meta.jsp"/>
  		<put-attribute name="header" value="/WEB-INF/tiles/kor/header.jsp"/>
- 		<put-attribute name="left" value="/WEB-INF/tiles/kor/left.jsp"/>
- 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"/>
+ 		<put-attribute name="footer" value="/WEB-INF/tiles/kor/footer.jsp"/>
  	</definition>
  	
- 	<definition name="layout_manage" template="/WEB-INF/tiles/layout.jsp">
+ 	<definition name="layout_manage" template="/WEB-INF/tiles/layout-manage.jsp">
+ 		<put-attribute name="meta" value="/WEB-INF/tiles/manage/meta.jsp"/>
  		<put-attribute name="header" value="/WEB-INF/tiles/manage/header_manage.jsp"/>
  		<put-attribute name="left" value="/WEB-INF/tiles/manage/left_manage.jsp"/>
- 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"/>
  	</definition>
  	
  	<!-- 적용 예외 -->
  	<definition name="empty" template="/WEB-INF/tiles/layout-empty.jsp">
- 		
+ 		<put-attribute name="meta" value="/WEB-INF/tiles/manage/meta.jsp"/>
  	</definition>
  	
  	<!-- 일반 사용자 -->

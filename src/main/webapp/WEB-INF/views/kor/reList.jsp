@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}/"/>
+<ul>
+	<li <c:if test="${index eq 0 }">class="on"</c:if>><a href="javascript:void(0)" onclick="reList(0,1)">전체</a></li>
+	<c:forEach var="obj" items="${menuNameList}">
+	<li <c:if test="${index eq obj.subMenuName_index_seq }">class="on"</c:if>><a href="javascript:void(0)" onclick="reList(${obj.subMenuName_index_seq}),1">${obj.title}</a></li>
+	</c:forEach>
+</ul>
 <table>
 <c:choose>
 	<c:when test="${empty menuList}">

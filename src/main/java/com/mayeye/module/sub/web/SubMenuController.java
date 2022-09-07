@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -20,12 +21,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mayeye.module.file.FileVO;
 import com.mayeye.module.file.service.FileServiceImpl;
 import com.mayeye.module.sub.SubMenuNameVO;
+import com.mayeye.module.sub.SubMenuPageVO;
 import com.mayeye.module.sub.SubMenuVO;
 import com.mayeye.module.sub.service.SubMenuServiceImpl;
 
@@ -94,45 +97,52 @@ public class SubMenuController {
 	}
 	
 	// 게시글 가져오기
-	private List<SubMenuVO> importMenuPeed(){
-		List<SubMenuVO> list = subMenuService.selectAll();
+	private List<SubMenuVO> importMenuPeed(int subMenuName_index_seq, int page){
+		List<SubMenuVO> list = null;
+		if(subMenuName_index_seq != 0) {
+			list = subMenuService.findSubMenuNameList(subMenuName_index_seq, page);
+		}else {
+			list = subMenuService.selectAll(page);
+		}
+		
 		return list;
 	}
-	
 	
 	// 관리자 폼이동
 	@GetMapping()
 	public String manage() {
 		log.info("Move form manage");
-		return "member/manage/info";
-	}
-	
-	// 리스트 확인 폼이동(관리자)
-	@GetMapping("/menuList")
-	public String menuList(Model model) {
-		log.info("Load Listform manage");
-		model.addAttribute("menuNameList", importMenuName());
-		model.addAttribute("menuList", importMenuPeed());
-		return "member/manage/menuList";
+		return "member/info";
 	}
 	
 	// 분류별 리스트 확인 폼이동(ajax)(관리자)
-	 @PostMapping("/menuList")
-	 public String reList(@RequestParam("index") String index, Model model) throws Exception{
+	@RequestMapping(value = "/menuList", method = {RequestMethod.GET, RequestMethod.POST})
+	public String reList(@RequestParam(value="index", defaultValue = "0") String index, Model model,
+			 @RequestParam(value = "page", defaultValue = "1") int page,
+			 HttpServletRequest req) throws Exception{
+		
+		SubMenuPageVO pagevo = subMenuService.getContentCnt(Integer.parseInt(index), page);
+		model.addAttribute("page", pagevo);
+		
 		 int subMenuName_index_seq = Integer.parseInt(index);
+		 model.addAttribute("index", subMenuName_index_seq);
+		 model.addAttribute("menuNameList", importMenuName());
+		 model.addAttribute("menuList", importMenuPeed(subMenuName_index_seq, page));
+		 
+		 if(req.getMethod().equals("GET")) {
+			 return "member/manage/menuList";
+		 }
 		 
 		 // index가 0이 아니면 해당하는 index의 리스트 가져오기
 		 if(subMenuName_index_seq != 0) {
 			 log.info("Load List seq : {}", subMenuName_index_seq);
-			 model.addAttribute("menuList", subMenuService.findSubMenuNameList(subMenuName_index_seq));
+			 model.addAttribute("menuList", subMenuService.findSubMenuNameList(subMenuName_index_seq, page));
 		 }else {
 			 log.info("Load List");
-			 model.addAttribute("menuList", importMenuPeed());
 		 }
-		 model.addAttribute("menuNameList", importMenuName());
 		 return "empty/member/manage/reList";
 	 }
-	 
+	
 	// 리스트 추가 폼이동
 	@GetMapping("/create")
 	public String create(@ModelAttribute("insertSubMenuVO") SubMenuVO subMenuVO, Model model) {
@@ -176,7 +186,7 @@ public class SubMenuController {
 		subMenuService.insertPeed(subMenuVO);
 		
 		model.addAttribute("menuNameList", importMenuName());
-		model.addAttribute("menuList", importMenuPeed());
+		model.addAttribute("menuList", importMenuPeed(0, 1));
 		
 		return "member/manage/menuList";
 	}
@@ -199,6 +209,8 @@ public class SubMenuController {
 		SubMenuVO tempsubMenuVO = subMenuService.selectSubMenuVO(subMenuList_index_seq);
 		subMenuVO.setSubMenuName(importMenuName());
 		subMenuVO.setFilevo(tempsubMenuVO.getFilevo());
+		model.addAttribute("modifySubMenuVO", subMenuVO);
+		
 		if(result.hasErrors()) {
 			log.error("modify error : {}", result.getAllErrors());
 			return "member/manage/modify";
@@ -227,7 +239,7 @@ public class SubMenuController {
 		subMenuService.updatePeed(subMenuVO);
 		
 		model.addAttribute("menuNameList", importMenuName());
-		model.addAttribute("menuList", importMenuPeed());
+		model.addAttribute("menuList", importMenuPeed(0, 1));
 		
 		return "member/manage/menuList";
 	}
@@ -240,7 +252,7 @@ public class SubMenuController {
 		subMenuService.deletePeed(subMenuList_index_seq);
 		
 		model.addAttribute("menuNameList", importMenuName());
-		model.addAttribute("menuList", importMenuPeed());
+		model.addAttribute("menuList", importMenuPeed(0, 1));
 		
 		return "member/manage/menuList";
 	}
@@ -253,7 +265,7 @@ public class SubMenuController {
 		subMenuService.recoverPeed(subMenuList_index_seq);
 		
 		model.addAttribute("menuNameList", importMenuName());
-		model.addAttribute("menuList", importMenuPeed());
+		model.addAttribute("menuList", importMenuPeed(0, 1));
 		
 		return "member/manage/menuList";
 	}
@@ -267,7 +279,7 @@ public class SubMenuController {
 		subMenuService.deleteComplPeed(subMenuList_index_seq);
 		
 		model.addAttribute("menuNameList", importMenuName());
-		model.addAttribute("menuList", importMenuPeed());
+		model.addAttribute("menuList", importMenuPeed(0, 1));
 		
 		return "member/manage/menuList";
 	}
