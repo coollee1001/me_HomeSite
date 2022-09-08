@@ -210,7 +210,7 @@ public class SubMenuController {
 		subMenuVO.setSubMenuName(importMenuName());
 		subMenuVO.setFilevo(tempsubMenuVO.getFilevo());
 		model.addAttribute("modifySubMenuVO", subMenuVO);
-		
+		System.out.println("subMenuVO : "+ subMenuVO.toString());
 		if(result.hasErrors()) {
 			log.error("modify error : {}", result.getAllErrors());
 			return "member/manage/modify";

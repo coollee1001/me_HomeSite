@@ -339,7 +339,6 @@ var mayeyeBusiness = {
         var obj = str;
             obj.box = obj.find(" .list");
         var link = obj.attr("data-target-link");
-
         for(var i=0; i<data.length; i++){
             if(i===0) $('<ul />').appendTo(obj.box.empty());
             $('<li>\
@@ -428,9 +427,9 @@ var mayeyeBusiness = {
             $('<li>\
                 <a href="#" class="bx" onclick="mayeyeImagePop.on(\''+data.image+'\',\''+data.title+'\');">\
                     <span class="bg"><span style="background-image:url('+data.thumb+');"></span></span>\
-                    <span class="in">\
+                    <span class="in" onclick="location.href=\''+data.link+'\'">\
                         <em>'+data.type+'</em>\
-                        <strong>'+data.title+'</strong>\
+                        <strong>'+data.title+'</strong></a>\
                     </span>\
                 </a>\
             </li>').appendTo(obj.box.find(">ul"));
@@ -450,12 +449,12 @@ var mayeyeBusiness = {
     init:function(){
         if($('[data-js="business"]').length !== 0){
             var _this = this;
-            $.ajax("/resources/json/business.json").done(function(data){
+            $.ajax("/kor/submenuList").done(function(data){
                 _this.list($('[data-js="business"]'),data.data);
             });
         } else if($('[data-js="business-view"]').length !== 0){
             var _this = this;
-            $.ajax("/resources/json/business.json").done(function(data){
+            $.ajax("/kor/submenuList").done(function(data){
                 _this.view($('[data-js="business-view"]'),data.data);
             });
         }
