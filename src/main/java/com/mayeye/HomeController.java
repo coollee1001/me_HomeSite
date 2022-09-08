@@ -14,18 +14,11 @@ import com.mayeye.module.member.MemberVO;
 @Controller
 public class HomeController {
 	private static final Logger log = LoggerFactory.getLogger(HomeController.class);	
-	
-	// 일반사용자용
-	@GetMapping("/kor")
-	public String kor() {
-		log.info("Move form common");
-		return "redirect:/kor/submenuList";
-	}
-	
-	@GetMapping("/")
-	public String kor_main() {
-		log.info("Move form common");
-		return "redirect:/kor/submenuList";
+	// tiles 설정을 위한 index 설정
+	@GetMapping()
+	public String index() {
+		log.info("main form");
+		return "kor/index";
 	}
 	
 	// 홈화면폼, 로그인 세션확인(관리자용)

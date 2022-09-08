@@ -19,7 +19,7 @@
     },
     "hot":{
         "body":["2021","웹어워드코리아 2021","콘텐츠 이노베이션대상 수상","한국수자원공사 국가가뭄정보포털"],
-        "image":"../images/content/1-3_hot_image.png",
-        "mark":"../images/content/1-3_hot_simbol.svg"
+        "image":"/resources/images/content/1-3_hot_image.png",
+        "mark":"/resources/images/content/1-3_hot_simbol.svg"
     }
 }

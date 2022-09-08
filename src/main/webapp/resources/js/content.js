@@ -147,7 +147,7 @@ var mayeyeHistory = {
     init:function(){
         if($('[data-js="history"]').length !== 0){
             var _this = this;
-            $.ajax("../json/history.json").done(function(data){
+            $.ajax("/resources/json/history.json").done(function(data){
                 _this.set($('[data-js="history"]'),data.data);
             });
         }
@@ -194,7 +194,7 @@ var mayeyeAwards = {
     init:function(){
         if($('[data-js="awards"]').length !== 0){
             var _this = this;
-            $.ajax("../json/awards.json").done(function(data){
+            $.ajax("/resources/json/awards.json").done(function(data){
                 _this.set($('[data-js="awards"]'),data);
             });
         }
@@ -214,7 +214,7 @@ var mayeyeSangjang = {
     init:function(){
         if($('[data-js="sangjang"]').length !== 0){
             var _this = this;
-            $.ajax("../json/sangjang.json").done(function(data){
+            $.ajax("/resources/json/sangjang.json").done(function(data){
                 _this.set($('[data-js="sangjang"]'),data.data);
             });
         }
@@ -276,7 +276,7 @@ var mayeyePartner = {
     init:function(){
         if($('[data-js="partner"]').length !== 0){
             var _this = this;
-            $.ajax("../json/partner.json").done(function(data){
+            $.ajax("/resources/json/partner.json").done(function(data){
                 _this.set($('[data-js="partner"]'),data.data);
             });
         }
@@ -301,7 +301,7 @@ var mayeyeMap = {
 
                 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-                var imageSrc = '../images/content/map-pin.svg', // 마커이미지의 주소입니다    
+                var imageSrc = '/resources/images/content/map-pin.svg', // 마커이미지의 주소입니다    
                     imageSize = new kakao.maps.Size(52, 63.5), // 마커이미지의 크기입니다
                     imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                     
@@ -450,12 +450,12 @@ var mayeyeBusiness = {
     init:function(){
         if($('[data-js="business"]').length !== 0){
             var _this = this;
-            $.ajax("../json/business.json").done(function(data){
+            $.ajax("/resources/json/business.json").done(function(data){
                 _this.list($('[data-js="business"]'),data.data);
             });
         } else if($('[data-js="business-view"]').length !== 0){
             var _this = this;
-            $.ajax("../json/business.json").done(function(data){
+            $.ajax("/resources/json/business.json").done(function(data){
                 _this.view($('[data-js="business-view"]'),data.data);
             });
         }

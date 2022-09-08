@@ -26,6 +26,9 @@
  	<definition name="kor/*" extends="layout">
  		<put-attribute name="body" value="/WEB-INF/views/kor/{1}.jsp"/>
  	</definition>
+ 	<definition name="kor/*/*" extends="layout">
+ 		<put-attribute name="body" value="/WEB-INF/views/kor/{1}/{2}.jsp"/>
+ 	</definition>
  	
  	<!-- 관리자 -->
  	<definition name="member/*" extends="layout_manage">

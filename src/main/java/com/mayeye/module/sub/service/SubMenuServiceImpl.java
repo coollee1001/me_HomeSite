@@ -1,8 +1,6 @@
 package com.mayeye.module.sub.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,7 @@ import com.mayeye.module.sub.SubMenuVO;
 import com.mayeye.module.sub.repository.SubMenuRepository;
 
 @Service
-public class SubMenuServiceImpl implements SebMenuService {
+public class SubMenuServiceImpl implements SubMenuService {
 	
 	@Autowired
 	private SubMenuRepository subMenuRepository;

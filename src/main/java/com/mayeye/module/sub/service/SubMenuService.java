@@ -6,7 +6,7 @@ import com.mayeye.module.sub.SubMenuNameVO;
 import com.mayeye.module.sub.SubMenuPageVO;
 import com.mayeye.module.sub.SubMenuVO;
 
-public interface SebMenuService {
+public interface SubMenuService {
 	
 	// 모든 리스트 가져오기
 	public List<SubMenuVO> selectAll(int page);

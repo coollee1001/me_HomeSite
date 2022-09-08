@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mayeye.module.sub.SubMenuNameVO;
-import com.mayeye.module.sub.SubMenuPageVO;
 import com.mayeye.module.sub.SubMenuVO;
-import com.mayeye.module.sub.service.SubMenuServiceImpl;
+import com.mayeye.module.sub.service.SubkorMenuServiceImpl;
 
 @Controller
 @RequestMapping("/kor")
@@ -25,21 +24,21 @@ public class SubkorMenuController {
 	private static final Logger log = LoggerFactory.getLogger(SubkorMenuController.class);
 	
 	@Autowired
-	private SubMenuServiceImpl subMenuService;
+	private SubkorMenuServiceImpl subkorMenuService;
 	
 	// 메뉴 이름 불러오기
 	private List<SubMenuNameVO> importMenuName(){
-		List<SubMenuNameVO> nameList = subMenuService.selectName();
+		List<SubMenuNameVO> nameList = subkorMenuService.selectName();
 		return nameList;
 	}
 	
 	// 삭제되지 않은 리스트 불러오기
-	private List<SubMenuVO> importMenuPeed(int subMenuName_index_seq, int page){
+	private List<SubMenuVO> importMenuPeed(int subMenuName_index_seq){
 		List<SubMenuVO> templist = new ArrayList<SubMenuVO>();
 		if(subMenuName_index_seq != 0) {
-			templist = subMenuService.findSubMenuNameList(subMenuName_index_seq, page);
+			templist = subkorMenuService.findSubMenuNameList(subMenuName_index_seq);
 		}else {
-			templist = subMenuService.selectAll(page);
+			templist = subkorMenuService.selectAll();
 		}
 		List<SubMenuVO> list = new ArrayList<SubMenuVO>();
 		for(SubMenuVO vo : templist) {
@@ -55,13 +54,10 @@ public class SubkorMenuController {
 			 @RequestParam(value = "page", defaultValue = "1") int page,
 			 HttpServletRequest req) throws Exception{
 		
-		SubMenuPageVO pagevo = subMenuService.getContentCnt(Integer.parseInt(index), page);
-		model.addAttribute("page", pagevo);
-		
 		 int subMenuName_index_seq = Integer.parseInt(index);
 		 model.addAttribute("index", subMenuName_index_seq);
 		 model.addAttribute("menuNameList", importMenuName());
-		 model.addAttribute("menuList", importMenuPeed(subMenuName_index_seq, page));
+		 model.addAttribute("menuList", importMenuPeed(subMenuName_index_seq));
 		 
 		 if(req.getMethod().equals("GET")) {
 			 log.info("submenuList.get method");

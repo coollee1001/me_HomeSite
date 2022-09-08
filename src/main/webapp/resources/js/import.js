@@ -5,7 +5,7 @@ function addScript(str,t){var script = document.createElement('script');script.s
 function addBabel(str,t){var script = document.createElement('script');script.setAttribute('type','text/babel');script.setAttribute('data-presets','es2015,stage-2');if(typeof str === 'function'){script.innerHTML = str.toString().replace(/^(function).*[^{]/,'').replace(/}$/,'');} else {script.src = str;script.async = false;}if(t !== undefined){setTimeout(function(){document.body.appendChild(script);},t);} else {document.body.appendChild(script);}}
 function addCss(str){var css = document.createElement('link');css.rel = 'stylesheet';css.href = str;document.head.appendChild(css);}
 
-var localPath = '/resources';
+var localPath = _param.CONTEXT_PATH;
 var commonPath = (navigator.onLine === false) ? localPath:'https://cdn.jsdelivr.net/gh/mayeyes/cdn';
 
 
