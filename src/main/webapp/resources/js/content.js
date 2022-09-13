@@ -427,9 +427,9 @@ var mayeyeBusiness = {
             $('<li>\
                 <a href="#" class="bx" onclick="mayeyeImagePop.on(\''+data.image+'\',\''+data.title+'\');">\
                     <span class="bg"><span style="background-image:url('+data.thumb+');"></span></span>\
-                    <span class="in" onclick="location.href=\''+data.link+'\'">\
+                    <span class="in">\
                         <em>'+data.type+'</em>\
-                        <strong>'+data.title+'</strong></a>\
+                        <strong onclick="window.open(\''+data.link+'\')">'+data.title+'</strong></a>\
                     </span>\
                 </a>\
             </li>').appendTo(obj.box.find(">ul"));
@@ -441,6 +441,7 @@ var mayeyeBusiness = {
         for(var i=min; i<max; i++){
             templet(obj.list[i]);
         }
+        
 
         if((min+obj.listAddCnt) > obj.list.length){
             obj.btnBove.remove();

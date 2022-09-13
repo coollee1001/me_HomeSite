@@ -3,8 +3,8 @@ package com.mayeye.module.sub;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.URL;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mayeye.module.file.FileVO;
@@ -30,7 +30,7 @@ public class SubMenuVO {
 	
 	// 연결 홈페이지 링크
 	@NotBlank
-	@Pattern(regexp = "^(?:http(s)?:\\/\\/)?(?:[a-zA-Z0-9]\\.)?[a-zA-Z0-9./]+$", message = "http[s]://~ 형태로 입력해주세요")
+	@URL(message = "URL 형태로 입력해주세요")
 	private String link;
 	
 	// 순서 제어

@@ -26,8 +26,7 @@
 		</div>
 		<div class="view">
 			<form:form action="${root}member/manage/modify_pro" method="post" modelAttribute="modifySubMenuVO" enctype="multipart/form-data" id="modifyform">
-			<input type="hidden" id="modifyidx" name="modifyidx" value="${modifySubMenuVO.subMenuList_index_seq}">
-			<form:hidden path="listOrder"/>
+			<form:hidden path="subMenuList_index_seq"/>
 			<form:hidden path="file_seq"/>
 			<div class="align_right mb_05"><span class="red">*</span> 는 필수값입니다.</div>
 			<table class="table ty2">
@@ -65,7 +64,7 @@
 					<tr>
 						<th scope="row">수정할 이미지 <span class="red">*</span></th>
 						<td>
-							<input type="file" name="tempFile" id="tempFile"/>
+							<input type="file" name="tempFile" id="tempFile" accept="image/*"/>
 							<form:errors path="tempFile" style="color:red"/>
 						</td>
 					</tr>

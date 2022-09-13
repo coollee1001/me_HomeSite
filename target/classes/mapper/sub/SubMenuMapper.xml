@@ -100,7 +100,6 @@
 			set subMenuName_index_seq = #{subMenuName_index_seq},
 			 	title = #{title},
 			 	link = #{link},
-			 	listOrder = #{listOrder},
 			 	File_seq = #{file_seq}
 			where subMenuList_index_seq = #{subMenuList_index_seq}
 		]]>

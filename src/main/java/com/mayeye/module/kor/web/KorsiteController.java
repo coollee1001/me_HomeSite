@@ -20,8 +20,7 @@ public class KorsiteController {
 	
 	
 	@RequestMapping(value = "/{title}/{form}", method = {RequestMethod.GET, RequestMethod.POST})
-	public String moveCompanyForm(@PathVariable String title, @PathVariable String form, Model model,
-				@RequestParam(name = "type", defaultValue = "-1") String type) {
+	public String moveCompanyForm(@PathVariable String title, @PathVariable String form, Model model) {
 		model.addAttribute("tab", form);
 		
 		return "kor/"+title+"/"+form;

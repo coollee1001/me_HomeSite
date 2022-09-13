@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -153,13 +153,16 @@ public class SubMenuController {
 	
 	// 리스트 추가 처리
 	@PostMapping("/create_pro")
-	public String create_pro(@Valid @ModelAttribute("insertSubMenuVO") SubMenuVO subMenuVO, BindingResult result, Model model) {
+	public String create_pro(@Validated @ModelAttribute("insertSubMenuVO") SubMenuVO subMenuVO, BindingResult result, Model model) {
 		log.info("create List");
 		subMenuVO.setSubMenuName(importMenuName());
+		
 		if(result.hasErrors()) {
 			log.error("create error : {}", result.getAllErrors());
 			return "member/manage/create";
 		}
+		
+		System.out.println(result.getObjectName());
 		
 		if(subMenuVO.getTempFile().isEmpty()) {
 			log.error("create error : file is Empty");
@@ -195,22 +198,26 @@ public class SubMenuController {
 	@GetMapping("/modify")
 	public String modify(@ModelAttribute("modifySubMenuVO") SubMenuVO subMenuVO, @RequestParam("modifyidx") int subMenuList_index_seq, Model model) {
 		log.info("move modify form");
-		subMenuVO = subMenuService.selectSubMenuVO(subMenuList_index_seq);
+		SubMenuVO tempsubMenuVO = subMenuService.selectSubMenuVO(subMenuList_index_seq);
 		subMenuVO.setSubMenuName(importMenuName());
 		
-		model.addAttribute("modifySubMenuVO", subMenuVO);
+		model.addAttribute("modifySubMenuVO", tempsubMenuVO);
 		return "member/manage/modify";
 	}
 	
 	// 리스트 수정
 	@PostMapping("/modify_pro")
-	public String modify_pro(@Valid @ModelAttribute("modifySubMenuVO") SubMenuVO subMenuVO, @RequestParam("modifyidx") int subMenuList_index_seq,
-			BindingResult result, Model model) {
-		SubMenuVO tempsubMenuVO = subMenuService.selectSubMenuVO(subMenuList_index_seq);
+	public String modify_pro(@Validated @ModelAttribute("modifySubMenuVO") SubMenuVO subMenuVO, BindingResult result,
+			 Model model) {
+		SubMenuVO tempsubMenuVO = subMenuService.selectSubMenuVO(subMenuVO.getSubMenuList_index_seq());
 		subMenuVO.setSubMenuName(importMenuName());
 		subMenuVO.setFilevo(tempsubMenuVO.getFilevo());
+		subMenuVO.setDel_sts(tempsubMenuVO.getDel_sts());
+		
 		model.addAttribute("modifySubMenuVO", subMenuVO);
+		
 		System.out.println("subMenuVO : "+ subMenuVO.toString());
+
 		if(result.hasErrors()) {
 			log.error("modify error : {}", result.getAllErrors());
 			return "member/manage/modify";
@@ -235,7 +242,7 @@ public class SubMenuController {
 		
 		//param name이 다르므로 index 설정, 게시글 update
 		log.info("dispose of update modify peed");
-		subMenuVO.setSubMenuList_index_seq(subMenuList_index_seq);
+		subMenuVO.setSubMenuList_index_seq(subMenuVO.getSubMenuList_index_seq());
 		subMenuService.updatePeed(subMenuVO);
 		
 		model.addAttribute("menuNameList", importMenuName());
