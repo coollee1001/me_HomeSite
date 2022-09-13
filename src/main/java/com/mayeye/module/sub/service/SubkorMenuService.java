@@ -3,7 +3,6 @@ package com.mayeye.module.sub.service;
 import java.util.List;
 
 import com.mayeye.module.sub.SubMenuNameVO;
-import com.mayeye.module.sub.SubMenuPageVO;
 import com.mayeye.module.sub.SubMenuVO;
 
 public interface SubkorMenuService {

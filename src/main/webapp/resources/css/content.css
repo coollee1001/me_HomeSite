@@ -511,7 +511,7 @@ html[data-skin="dark"] #txt [data-content="1-3"]>.item-2>.layout>.midd>ul>li>str
 
 
 /* 주요사업실적 */
-#txt [data-js="business-view"]{padding-bottom:12rem;}
+#txt [data-js="business-view"]{padding-bottom:25rem;}
 #txt [data-js="business-view"] .list{margin-top:10rem;}
 #txt [data-js="business-view"] .list>ul{display:flex; flex-wrap:wrap;}
 #txt [data-js="business-view"] .list>ul>li{width:calc((100% - (3rem * 2)) / 3); margin-right:3rem;}
@@ -556,7 +556,7 @@ html[data-skin="dark"] #txt [data-content="1-3"]>.item-2>.layout>.midd>ul>li>str
     #txt [data-js="business-view"] .list>ul>li:nth-child(n+3){margin-top:2rem;}
 }
 @media screen and (max-width:650px) {
-    #txt [data-js="business-view"]{padding-bottom:5rem;}
+    #txt [data-js="business-view"]{padding-bottom:25rem;}
     #txt [data-js="business-view"] .list{margin-top:3rem;}
     #txt [data-js="business-view"] .list>ul{border-top:1px solid #ddd;}
     #txt [data-js="business-view"] .list>ul>li{width:100%; margin-right:0 !important; border-bottom:1px solid #ddd;}

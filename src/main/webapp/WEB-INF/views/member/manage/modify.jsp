@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리스트 추가</title>
+<title>리스트 수정</title>
 </head>
 <body>
 	<h3>소분류 리스트</h3>
@@ -16,16 +16,17 @@
 		<div class="controls">
 			<input type="submit" class="btn bor ty_2" value="수정" form="modifyform"/>
 			<c:if test="${modifySubMenuVO.del_sts eq 'N'}">
-				<button type="button" class="btn bor ty_3" onclick="location.href='${root}member/manage/delete?deleteidx=${modifySubMenuVO.subMenuList_index_seq}'">삭제</button>
+				<button type="button" class="btn bor ty_3" onclick="location.href='${root}member/manage/delete?deleteidx=${modifySubMenuVO.subMenuList_index_seq}&index=${index}&page=${page}'">삭제</button>
 			</c:if>
 			<c:if test="${modifySubMenuVO.del_sts eq 'Y'}">
-				<button type="button" class="btn bor ty_2" onclick="location.href='${root}member/manage/recover?recoveridx=${modifySubMenuVO.subMenuList_index_seq}'">복구</button>
-				<button type="button" class="btn bor ty_3" onclick="location.href='${root}member/manage/deleteCompl?deleteidx=${modifySubMenuVO.subMenuList_index_seq}'">완전 삭제</button>
+				<button type="button" class="btn bor ty_2" onclick="location.href='${root}member/manage/recover?recoveridx=${modifySubMenuVO.subMenuList_index_seq}&index=${index}&page=${page}'">복구</button>
+				<button type="button" class="btn bor ty_3" onclick="location.href='${root}member/manage/deleteCompl?deleteidx=${modifySubMenuVO.subMenuList_index_seq}&index=${index}&page=${page}'">완전 삭제</button>
 			</c:if>
-			<input type="button" class="btn bor ty_4" onclick="location.href='${root}member/manage/menuList'" value="취소">
+			<input type="button" class="btn bor ty_4" onclick="location.href='${root}member/manage/menuList?index=${index}&page=${page}'" value="취소">
 		</div>
 		<div class="view">
 			<form:form action="${root}member/manage/modify_pro" method="post" modelAttribute="modifySubMenuVO" enctype="multipart/form-data" id="modifyform">
+			<input type="hidden" id="page" name="page"/>
 			<form:hidden path="subMenuList_index_seq"/>
 			<form:hidden path="file_seq"/>
 			<div class="align_right mb_05"><span class="red">*</span> 는 필수값입니다.</div>

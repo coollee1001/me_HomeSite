@@ -42,10 +42,10 @@
 					</td>
 					<c:choose>
 						<c:when test="${obj.del_sts eq 'Y'}">
-							<td class="align_left"><span style="color:red">[삭제]</span>&nbsp;<a href='${root}member/manage/modify?modifyidx=${obj.subMenuList_index_seq}'>${obj.title}</a></td>
+							<td class="align_left"><span style="color:red">[삭제]</span>&nbsp;<a href='${root}member/manage/modify?modifyidx=${obj.subMenuList_index_seq}&page=${page.currentPage}&index=${index}'>${obj.title}</a></td>
 						</c:when>
 						<c:otherwise>
-							<td class="align_left"><a href='${root}member/manage/modify?modifyidx=${obj.subMenuList_index_seq}'>${obj.title}</a></td>
+							<td class="align_left"><a href='${root}member/manage/modify?modifyidx=${obj.subMenuList_index_seq}&page=${page.currentPage}&index=${index}'>${obj.title}</a></td>
 						</c:otherwise>
 					</c:choose>
 					</tr>

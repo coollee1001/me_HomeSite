@@ -15,7 +15,7 @@
 	<div class="inner">
 		<div class="controls">
 			<input type="submit" class="btn bor ty_2" value="등록" form="createform"/>
-			<input type="button" class="btn bor ty_3" onclick="location.href='${root}member/manage/menuList'" value="취소">
+			<input type="button" class="btn bor ty_3" onclick="location.href='${root}member/manage/menuList?index=${index}&page=${page}'" value="취소">
 		</div>
 		<div class="view">
 			<form:form action="${root}member/manage/create_pro" method="post" modelAttribute="insertSubMenuVO" enctype="multipart/form-data" id="createform">

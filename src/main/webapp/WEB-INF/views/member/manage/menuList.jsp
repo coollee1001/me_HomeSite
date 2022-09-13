@@ -7,11 +7,23 @@
 <head>
 <meta charset="UTF-8">
 <title>리스트</title>
-<script type="text/javascript">
-	window.onload=function(){
-		reList(0);
-	}
-</script>
+<c:choose>
+	<c:when test="${page.getClass().simpleName == 'SubMenuPageVO'}">
+		<script type="text/javascript">
+			window.onload=function(){
+				reList(${index}, ${page.currentPage});
+			}
+		</script>
+	</c:when>
+	<c:otherwise>
+		<script type="text/javascript">
+			window.onload=function(){
+				reList(${index}, ${page});
+			}
+		</script>
+	</c:otherwise>
+</c:choose>
+
 </head>
 <body>
 	<h3>소분류 리스트</h3>

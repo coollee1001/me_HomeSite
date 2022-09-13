@@ -8,7 +8,6 @@ function addCss(str){var css = document.createElement('link');css.rel = 'stylesh
 var localPath = _param.CONTEXT_PATH;
 var commonPath = (navigator.onLine === false) ? localPath:'https://cdn.jsdelivr.net/gh/mayeyes/cdn';
 
-
 // 웹폰트 로드
 document.write('<link rel="stylesheet" href="'+localPath+'/css/core.css" />');
 document.write('<link rel="stylesheet" href="'+localPath+'/css/layout.css" />');
