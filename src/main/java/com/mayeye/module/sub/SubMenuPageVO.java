@@ -20,6 +20,8 @@ public class SubMenuPageVO {
 	private int currentPage;
 	// 전체 글 개수
 	private int pageContentcnt;
+	// 페이지당 글 개수
+	private int contentPageCnt;
 	
 	/**
 	 * 
@@ -32,6 +34,7 @@ public class SubMenuPageVO {
 		// 현재 페이지 번호 설정
 		this.currentPage = currentPage;
 		this.pageContentcnt = contentCnt;
+		this.contentPageCnt = contentPageCnt;
 		
 		// 전체 페이지 개수 (전체 글 개수(DB 불러와서 받을 것) / 페이지당 글 개수(설정값))
 		pageCnt = contentCnt / contentPageCnt;

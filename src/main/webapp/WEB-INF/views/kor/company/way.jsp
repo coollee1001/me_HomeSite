@@ -21,7 +21,6 @@
 				<div class="layout">
 					<div class="map">
 						<div class="head">
-							<!-- API에 등록한 주소가 아니므로 안뜸 -->
 							<div data-js="map" lat="36.390923688451274" lng="127.31272874081593"></div>
 						</div>
 						<div class="midd">

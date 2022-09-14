@@ -39,7 +39,7 @@ window.onload = function(){
         addScript(localPath+'/js/mainText.js',10);
     } else {// 서브
         // 지도
-        addScript('//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=6ffcad5f0b6bc4e20594ef457fd62e1a');
+        addScript('//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=c16d1bef2d6cf9fe261105a84cea36a1');
     }
     
     addScript(localPath+'/js/content.js',10);

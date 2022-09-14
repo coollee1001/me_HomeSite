@@ -22,7 +22,7 @@ public class HomeController {
 	}
 	
 	// 홈화면폼, 로그인 세션확인(관리자용)
-	@GetMapping("/home")
+	@GetMapping("/cms")
 	public String home(HttpServletRequest req, Model model) {
 		log.info("check session");
 		HttpSession session = req.getSession();

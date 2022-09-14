@@ -34,7 +34,7 @@
 			<tbody>
 				<c:forEach var='obj' items="${menuList}" varStatus="status">
 					<tr>
-					<td>${page.pageContentcnt - ((page.currentPage-1) * 5) - status.index}</td>
+					<td>${page.pageContentcnt - ((page.currentPage-1) * page.contentPageCnt) - status.index}</td>
 					<td>
 						<c:forEach items="${menuNameList}" var="name">
 							<c:if test="${name.subMenuName_index_seq eq obj.subMenuName_index_seq}">${name.title}</c:if>
