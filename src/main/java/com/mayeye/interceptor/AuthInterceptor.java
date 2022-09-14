@@ -26,7 +26,7 @@ public class AuthInterceptor implements HandlerInterceptor{
 		String contextPath = request.getContextPath();
 		
 		if(!loginSession.getMember_code().equals("0")) {
-			out.println("<script>alert('권한이 없습니다'); location.href='"+contextPath+"/home';</script>");
+			out.println("<script>alert('권한이 없습니다'); location.href='"+contextPath+"/cms';</script>");
 			out.flush();
 			return false;
 		}
